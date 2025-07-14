@@ -1,30 +1,3 @@
-# 🍱 Community Food Map - Architecture Sketch (FastAPI + OpenAI + Mapbox)
-
-# --- Core Architecture ---
-# [User Frontend] --> [FastAPI (HTML/JS + API)] --> [OpenAI GPT] + [PostgreSQL DB] + [Mapbox API]
-
-# --- Tech Stack ---
-# - Backend: FastAPI (Python)
-# - AI/NLP: OpenAI GPT-4o (via API)
-# - Maps: Mapbox (for location visualization)
-# - Frontend: HTML + JS + Leaflet/Mapbox GL JS
-# - DB: PostgreSQL or SQLite (for food data)
-
-
-# --- Folder Structure ---
-
-project/
-├── app/
-│   ├── main.py                  # FastAPI app entrypoint
-│   ├── gpt_utils.py             # Handles ChatGPT interactions
-│   ├── db.py                    # DB connection and models
-│   ├── map_utils.py             # Handles Mapbox calls/geocoding
-│   └── templates/               # Jinja2 HTML templates
-│       └── index.html
-├── static/                      # CSS, JS, Images
-├── .env                         # Environment variables
-└── requirements.txt
-
 
 # --- Sample: main.py ---
 from fastapi import FastAPI, Request, Form

@@ -1,24 +1,34 @@
 # my-multi-work-calendar
 This is meant to be a Calendar App that adapts to the different sort of work schedules I or anyone may have in their lives. 
 
+# Progress
+Getting the first page started, in React.js ... Made with CRA.
+
+---
+
+- [x] Completed task
+- [ ] Incomplete task
+
+---
 
 🧱 Suggested Python-Based Tech Stack
 🔙 Backend: Python
 ✅ Framework
 
-    FastAPI
+    FastAPI:
+
     ➤ Fast, modern, async-ready, perfect for building high-performance APIs.
     ➤ Automatically generates Swagger UI docs.
 
 🗃️ Database
 
-  - PostgreSQL (relational, perfect for calendar/event data)
+    - PostgreSQL (relational, perfect for calendar/event data)
 
-  - ORM: SQLModel (from FastAPI's creator, combines SQLAlchemy + Pydantic)
+    - ORM: SQLModel (from FastAPI's creator, combines SQLAlchemy + Pydantic)
 
-    -OR use Tortoise ORM (if you want async support)
+    - OR use Tortoise ORM (if you want async support)
 
-    -OR SQLAlchemy (standard and flexible)
+    - OR SQLAlchemy (standard and flexible)
 
 🗂️ API Structure
 
@@ -68,4 +78,32 @@ Real-time sync	| WebSockets via FastAPI WebSockets or Socket.IO
 Deployment	| Docker, Gunicorn, Nginx
 Hosting	| Railway, Render, Fly.io, or Heroku
 
+---
+
+# 🍱 Community Food Map - Architecture Sketch (FastAPI + OpenAI + Mapbox)
+
+# --- Core Architecture ---
+# [User Frontend] --> [FastAPI (HTML/JS + API)] --> [OpenAI GPT] + [PostgreSQL DB] + [Mapbox API]
+
+# --- Tech Stack ---
+# - Backend: FastAPI (Python)
+# - AI/NLP: OpenAI GPT-4o (via API)
+# - Maps: Mapbox (for location visualization)
+# - Frontend: HTML + JS + Leaflet/Mapbox GL JS
+# - DB: PostgreSQL or SQLite (for food data)
+
+
+# --- Folder Structure ---
+
+project/
+├── app/
+│   ├── main.py                  # FastAPI app entrypoint
+│   ├── gpt_utils.py             # Handles ChatGPT interactions
+│   ├── db.py                    # DB connection and models
+│   ├── map_utils.py             # Handles Mapbox calls/geocoding
+│   └── templates/               # Jinja2 HTML templates
+│       └── index.html
+├── static/                      # CSS, JS, Images
+├── .env                         # Environment variables
+└── requirements.txt
 
