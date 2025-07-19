@@ -2,18 +2,17 @@
 This is meant to be a Calendar App that adapts to the different sort of work schedules I or anyone may have in their lives. 
 
 # Progress
-Getting the first page started, in React.js ... Made with CRA.
+
+- [x] Started an React app using CRA.
+- [x] Getting the first Calendar page started. Good homepage.
+- [ ] Will try to create an React app using Vite.
+- [ ] Making events and pointing it on Calendar.
 
 ---
 
-- [x] Completed task
-- [ ] Incomplete task
+🔙 Backend: Python.
 
----
-
-🧱 Suggested Python-Based Tech Stack
-🔙 Backend: Python
-✅ Framework
+✅ Framework: FastAPI.
 
     FastAPI:
 
@@ -22,13 +21,13 @@ Getting the first page started, in React.js ... Made with CRA.
 
 🗃️ Database
 
-    - PostgreSQL (relational, perfect for calendar/event data)
+- PostgreSQL (relational, perfect for calendar/event data)
 
-    - ORM: SQLModel (from FastAPI's creator, combines SQLAlchemy + Pydantic)
+- ORM: SQLModel (from FastAPI's creator, combines SQLAlchemy + Pydantic)
 
-    - OR use Tortoise ORM (if you want async support)
+- OR use Tortoise ORM (if you want async support)
 
-    - OR SQLAlchemy (standard and flexible)
+- OR SQLAlchemy (standard and flexible)
 
 🗂️ API Structure
 
