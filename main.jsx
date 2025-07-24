@@ -1,20 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-// Lucide React icons for navigation
-// In a real project, you'd install: npm install lucide-react
-// For this self-contained example, we'll define a simple SVG icon.
-const ChevronLeft = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-left">
-    <path d="m15 18-6-6 6-6"/>
-  </svg>
-);
-
-const ChevronRight = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-right">
-    <path d="m9 18 6-6-6-6"/>
-  </svg>
-);
-
 // Main App Component
 const App = () => {
   const [currentDate, setCurrentDate] = useState(new Date());

@@ -18,6 +18,7 @@ const ChevronRight = () => (
 // Main App Component
 const App = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [viewMode, setViewMode] = React.useState("month"); // 'month', 'week', 'day'
 
   const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -31,23 +32,49 @@ const App = () => {
     return new Date(year, month, 1).getDay();
   };
 
-  // Function to navigate to the previous month
-  const goToPreviousMonth = useCallback(() => {
-    setCurrentDate(prevDate => {
+  // --- Navigation Functions ---
+
+  // Go to previous month
+  const goToPreviousMonth = React.useCallback(() => {
+    setCurrentDate((prevDate) => {
       const newDate = new Date(prevDate);
       newDate.setMonth(newDate.getMonth() - 1);
       return newDate;
     });
   }, []);
 
-  // Function to navigate to the next month
-  const goToNextMonth = useCallback(() => {
-    setCurrentDate(prevDate => {
+  // Go to next month
+  const goToNextMonth = React.useCallback(() => {
+    setCurrentDate((prevDate) => {
       const newDate = new Date(prevDate);
       newDate.setMonth(newDate.getMonth() + 1);
       return newDate;
     });
   }, []);
+
+  // Go to previous year
+  const goToPreviousYear = React.useCallback(() => {
+    setCurrentDate((prevDate) => {
+      const newDate = new Date(prevDate);
+      newDate.setFullYear(newDate.getFullYear() - 1);
+      return newDate;
+    });
+  }, []);
+
+  // Go to next year
+  const goToNextYear = React.useCallback(() => {
+    setCurrentDate((prevDate) => {
+      const newDate = new Date(prevDate);
+      newDate.setFullYear(newDate.getFullYear() + 1);
+      return newDate;
+    });
+  }, []);
+
+  // Go to today's date
+  const goToToday = React.useCallback(() => {
+    setCurrentDate(new Date());
+  }, []);
+
 
   // Effect to ensure the date object is always fresh for rendering
   useEffect(() => {
@@ -96,8 +123,59 @@ const App = () => {
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex items-center justify-center font-inter p-4">
       <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 w-full max-w-md border border-gray-200 dark:border-gray-700">
-        {/* Calendar Header */}
+        {/* View Mode Toggle */}
+        <div className="flex justify-center space-x-2 mb-6">
+          <button
+            onClick={() => setViewMode("month")}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200
+                    ${
+                      viewMode === "month"
+                        ? "bg-indigo-600 text-white shadow-md"
+                        : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
+                    }
+                `}
+          >
+            Month
+          </button>
+          <button
+            onClick={() => setViewMode("week")}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200
+                    ${
+                      viewMode === "week"
+                        ? "bg-indigo-600 text-white shadow-md"
+                        : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
+                    }
+                `}
+          >
+            Week
+          </button>
+          <button
+            onClick={() => setViewMode("day")}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200
+                    ${
+                      viewMode === "day"
+                        ? "bg-indigo-600 text-white shadow-md"
+                        : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
+                    }
+                `}
+          >
+            Day
+          </button>
+        </div>
+
+        {/* Calendar Header (Month & Year Navigation) */}
         <div className="flex justify-between items-center mb-6">
+          {/* Year Navigation Left */}
+          <button
+            onClick={goToPreviousYear}
+            className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            aria-label="Previous Year"
+          >
+            <ChevronLeft />
+            <ChevronLeft className="-ml-2" /> {/* Double chevron for year */}
+          </button>
+
+          {/* Month Navigation Left */}
           <button
             onClick={goToPreviousMonth}
             className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -105,9 +183,15 @@ const App = () => {
           >
             <ChevronLeft />
           </button>
-          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-            {currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
+
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white flex-grow text-center">
+            {currentDate.toLocaleString("default", {
+              month: "long",
+              year: "numeric",
+            })}
           </h2>
+
+          {/* Month Navigation Right */}
           <button
             onClick={goToNextMonth}
             className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -115,16 +199,49 @@ const App = () => {
           >
             <ChevronRight />
           </button>
+
+          {/* Year Navigation Right */}
+          <button
+            onClick={goToNextYear}
+            className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            aria-label="Next Year"
+          >
+            <ChevronRight className="-mr-2" /> {/* Double chevron for year */}
+            <ChevronRight />
+          </button>
         </div>
 
-        {/* Days of the Week */}
-        <div className="grid grid-cols-7 gap-2 mb-4">
-          {daysOfWeek.map(day => (
-            <div key={day} className="text-center font-medium text-sm text-gray-500 dark:text-gray-400">
-              {day}
-            </div>
-          ))}
+        {/* Go to Today Button */}
+        <div className="flex justify-center mb-6">
+          <button
+            onClick={goToToday}
+            className="px-5 py-2 bg-indigo-500 text-white rounded-full shadow-md hover:bg-indigo-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          >
+            Today
+          </button>
         </div>
+
+        {/* Conditional Rendering based on View Mode */}
+        {viewMode === "month" && (
+          <>
+            {/* Days of the Week */}
+            <div className="grid grid-cols-7 gap-2 mb-4">
+              {daysOfWeek.map((day) => (
+                <div
+                  key={day}
+                  className="text-center font-medium text-sm text-gray-500 dark:text-gray-400"
+                >
+                  {day}
+                </div>
+              ))}
+            </div>
+
+            {/* NNeed a lot workin on this one */}
+            {/* Days of the Month Grid */}
+            {/* <div className="grid grid-cols-7 gap-2">{renderMonthDays()}</div> */}
+          </>
+        )}
+
 
         {/* Days of the Month Grid */}
         <div className="grid grid-cols-7 gap-2">
